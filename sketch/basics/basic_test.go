@@ -40,3 +40,23 @@ func TestDateGap(t *testing.T) {
 }
 
 // go test -v -run=DateG
+
+func TestConvertBase(t *testing.T) {
+	tests := []struct {
+		num  int64
+		base int64
+		want string
+	}{
+		{579, 8, "1103"},
+		{0, 8, "0"},
+		{141414, 16, "22866"},
+		{14141209, 2, "110101111100011100011001"},
+	}
+	for _, v := range tests {
+		if res := ConvertBase(v.num, v.base); res != v.want {
+			t.Errorf("ConvertBase(%d, %d) = %q, expect %q", v.num, v.base, res, v.want)
+		}
+	}
+}
+
+// go test -v -run=ConvertBase
