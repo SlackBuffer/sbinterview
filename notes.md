@@ -364,7 +364,7 @@ while (scanf("%s", str) != EOF) {}
 // 字符串还有另一种读法可以用
 while(gets(str) != NULL) {}
 
-// a 或 b 有一个不为零就继续循环
+// a 或 b 有一个不为零就继续循环（not working）
 while (scanf("%d%d", &a, &b), a || b) {}
 ```
 
