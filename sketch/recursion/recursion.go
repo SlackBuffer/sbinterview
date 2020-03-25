@@ -6,8 +6,10 @@ var permutation []int
 var n int
 var m = map[int]bool{}
 
+// 往下标增大的方向递归，递归结束条件在下标增大到一定值时得到满足
+
 // 按字典序从小到大的顺序输出 1 ～ n 的全排列
-// index 指从左起第几位数字开始填充，依次填充第 1，2，...，n 位
+// * index 指从左起第几位数字开始填充，依次填充第 1，2，...，n 位
 func FullPermutation(index int) {
 	if index == n+1 { // 全部排好了
 		fmt.Println(permutation[1:])
@@ -21,6 +23,22 @@ func FullPermutation(index int) {
 			m[i] = true                // 填充到第 n 位时，所有 [1, n] 范围内的数字都已用到
 			FullPermutation(index + 1) // 保证字典序从小到大
 			m[i] = false               // * 复位
+		}
+	}
+}
+func FullPermutationDesc(index int) {
+	if index == n+1 { // 全部排好了
+		fmt.Println(permutation[1:])
+		return
+	}
+
+	// 枚举 [1, n] 范围内的数字，判断是否已用于全排列
+	for i := n; i >= 1; i-- { // *
+		if !m[i] {
+			permutation[index] = i
+			m[i] = true                    // 填充到第 n 位时，所有 [1, n] 范围内的数字都已用到
+			FullPermutationDesc(index + 1) // 保证相反字典序
+			m[i] = false                   // * 复位
 		}
 	}
 }

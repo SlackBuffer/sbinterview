@@ -1,6 +1,9 @@
 package recursion
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 var tests = []struct {
 	n int
@@ -18,9 +21,12 @@ var tests = []struct {
 
 func TestFullPermutation(t *testing.T) {
 	for _, test := range tests {
+		fmt.Println()
 		permutation = make([]int, test.n+1, test.n+1)
 		n = test.n
 		FullPermutation(1) // 从数字的左起第 1 位开始填充
+		fmt.Println()
+		FullPermutationDesc(1) // 从数字的左起第 1 位开始填充
 	}
 }
 
