@@ -31,3 +31,24 @@ func TestFullPermutation(t *testing.T) {
 }
 
 // go test -v -run=FullPermutation
+
+func TestNqueens(t *testing.T) {
+	tests := []struct {
+		numOfQueens      int
+		numOfPermutation int
+	}{
+		{
+			numOfQueens:      8,
+			numOfPermutation: 92,
+		},
+	}
+	for _, test := range tests {
+		N = test.numOfQueens
+		p = make([]int, N+1, N+1)
+		if res := Nqueens(test.numOfQueens); res != test.numOfPermutation {
+			t.Errorf("%d queens should have %d permutation, got %d", test.numOfQueens, test.numOfPermutation, res)
+		}
+	}
+}
+
+// go test -v -run=TestNqueens
