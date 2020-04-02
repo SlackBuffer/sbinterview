@@ -16,7 +16,7 @@ func BinarySearch(arr []int, target int) int {
 			return mid
 		}
 		if arr[mid] > target { // 从 [left, mid-1] 查找
-			right = mid - 1 // ** 减 1 和加 1 很关键，保证在区间范围较小时仍能让区间不断收窄
+			right = mid - 1 // ** 减 1 和加 1 很关键，它能保证在区间范围较小时仍能让区间不断收窄；要 +1 或 -1 是因为当前下标都不是要找的元素
 		} else {
 			left = mid + 1 // 从 [mid+1, right] 查找
 		}
@@ -49,7 +49,9 @@ func leftBoundary(arr []int, target int) int {
 	for left < right {
 		mid := left + (right-left)/2
 		if arr[mid] >= target { // 第一个大于等于 target 的位置在 mid 或 mid 的左侧（* 找到 target 本身后还要继续找），从 [left, mid] 查找
-			right = mid // right' < right（left=right-1，mid = left，right' = left）
+			// right' < right（left=right-1，mid = left，right' = left）
+			// * 当前找到的下标已经是潜在的满足条件的元素，若 right = mid+1 则可能直接把唯一一个满足条件的元素跳过，所以不能 +1，剩下的交由 left 边界包夹过来
+			right = mid
 		} else {
 			left = mid + 1 // 从 [mid+1, right] 查找，left' > left
 		}
